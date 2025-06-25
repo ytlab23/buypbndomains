@@ -384,6 +384,8 @@ p {
     margin-top: 2rem;
 }
 
+
+
 /* Features Section */
 .features {
     padding: 6rem 0;
@@ -394,7 +396,14 @@ p {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
-    margin-top: 3rem;
+    margin-top: 2rem;
+}
+
+/* For larger screens, ensure 3 columns for the 9 features */
+@media (min-width: 1200px) {
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 .feature-card {
