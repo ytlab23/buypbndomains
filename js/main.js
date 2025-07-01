@@ -179,24 +179,26 @@ document.addEventListener('DOMContentLoaded', function() {
     
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
-        const answer = item.querySelector('.faq-answer');
         
         question.addEventListener('click', () => {
-            const isOpen = item.classList.contains('active');
+            // Toggle current item
+            item.classList.toggle('active');
+            
+            // Update toggle symbol
+            const toggle = item.querySelector('.faq-toggle');
+            if (item.classList.contains('active')) {
+                toggle.textContent = '-';
+            } else {
+                toggle.textContent = '+';
+            }
             
             // Close all other FAQ items
-            faqItems.forEach(faq => {
-                if (faq !== item) {
-                    faq.classList.remove('active');
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item && otherItem.classList.contains('active')) {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.faq-toggle').textContent = '+';
                 }
             });
-            
-            // Toggle current item
-            if (!isOpen) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
-            }
         });
         
         // Keyboard navigation
@@ -208,11 +210,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Open first FAQ by default
-    if (faqItems.length > 0) {
-        faqItems[0].classList.add('active');
-    }
-
     // Mobile menu toggle (can be expanded if needed)
     const mobileMenuButton = document.createElement('button');
     mobileMenuButton.className = 'mobile-menu-button';
